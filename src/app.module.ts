@@ -11,6 +11,7 @@ import { TodoModule } from './todo/todo.module';
 import { join } from 'path';
 import { RoleModule } from './roles/roles.module';
 import { TeamModule } from './teams/teams.module';
+import { ProjectModule } from './org-projects/projects.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,7 @@ import { TeamModule } from './teams/teams.module';
     RoleModule,
     TimesheetModule,
     TeamModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
