@@ -24,7 +24,7 @@ export const dbConfig: DataSourceOptions = {
   password: MYSQL_PASSWORD,
   database: MYSQL_DATABASE,
   entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-  synchronize: true,
+  // synchronize: true,
 };
 
 export default new DataSource(dbConfig);
