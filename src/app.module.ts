@@ -12,6 +12,7 @@ import { join } from 'path';
 import { RoleModule } from './roles/roles.module';
 import { TeamModule } from './teams/teams.module';
 import { ProjectModule } from './org-projects/projects.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +25,7 @@ import { ProjectModule } from './org-projects/projects.module';
     TimesheetModule,
     TeamModule,
     ProjectModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

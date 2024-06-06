@@ -1,5 +1,11 @@
 import { Employee } from 'src/employees/entity/employees.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity({ name: 'projects' })
 export class Project {
   @PrimaryGeneratedColumn()
@@ -9,8 +15,8 @@ export class Project {
   uuid: string;
 
   @Column()
-  ProjectName: string;
+  projectName: string;
 
-  @OneToOne(() => Employee, (employee) => employee.project)
+  @OneToMany(() => Employee, (employee) => employee.project)
   employess: Employee;
 }

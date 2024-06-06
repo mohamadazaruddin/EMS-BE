@@ -1,4 +1,6 @@
+import { ProjectDto } from 'src/org-projects/projects.dto';
 import { RoleDto } from 'src/roles/roles.dto';
+import { TeamDto } from 'src/teams/teams.dto';
 
 export class CreateEmployee {
   email: string;
@@ -8,7 +10,7 @@ export class CreateEmployee {
   profileImage: string;
   contact_no: string;
   role: RoleDto;
-  // team: string;
+  team: TeamDto;
   parentId: number;
-  // project: string;
+  project: ProjectDto;
 }

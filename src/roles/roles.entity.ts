@@ -1,5 +1,11 @@
 import { Employee } from 'src/employees/entity/employees.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity({ name: 'role' })
 export class Role {
   @PrimaryGeneratedColumn()
@@ -11,6 +17,6 @@ export class Role {
   @Column()
   roleName: string;
 
-  @OneToOne(() => Employee, (employee) => employee.role)
+  @OneToMany(() => Employee, (employee) => employee.role)
   employess: Employee;
 }

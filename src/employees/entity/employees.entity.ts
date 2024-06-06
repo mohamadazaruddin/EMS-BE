@@ -36,20 +36,23 @@ export class Employee {
   profileImage: string;
 
   @Column('varchar')
+  token: string;
+
+  @Column('varchar')
   contact_no: string;
 
-  @OneToOne(() => Role, (role) => role.id)
+  @ManyToOne(() => Role, (role) => role.id)
   @JoinColumn()
   role: Role;
 
-  @OneToOne(() => Team, (team) => team.id)
+  @ManyToOne(() => Team, (team) => team.id)
   @JoinColumn()
   team: Team;
 
   @Column()
   parentId: number;
 
-  @OneToOne(() => Project, (project) => project.id)
+  @ManyToOne(() => Project, (project) => project.id)
   @JoinColumn()
   project: Project;
 

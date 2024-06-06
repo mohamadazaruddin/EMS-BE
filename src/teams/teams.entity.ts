@@ -17,6 +17,6 @@ export class Team {
   @Column()
   teamName: string;
 
-  @OneToOne(() => Employee, (employee) => employee.role)
+  @OneToMany(() => Employee, (employee) => employee.role)
   employess: Employee;
 }
