@@ -35,7 +35,7 @@ export class Employee {
   @Column('varchar')
   profileImage: string;
 
-  @Column('varchar')
+  @Column('varchar', { nullable: true })
   token: string;
 
   @Column('varchar')

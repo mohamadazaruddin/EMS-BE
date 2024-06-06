@@ -3,7 +3,7 @@ import { EmployeesService } from './employees.service';
 import { CreateEmployee } from './dto/create-employee.dto';
 import { Employee } from './entity/employees.entity';
 import { JwtGuard } from 'src/auth/guards/jwt-auth-guard';
-@UseGuards(JwtGuard)
+// @UseGuards(JwtGuard)
 @Controller('employees')
 export class EmployeesController {
   constructor(private employeesService: EmployeesService) {}
