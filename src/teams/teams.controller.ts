@@ -3,7 +3,7 @@ import { TeamService } from './teams.service';
 import { TeamDto } from './teams.dto';
 import { JwtGuard } from 'src/auth/guards/jwt-auth-guard';
 
-@UseGuards(JwtGuard)
+// @UseGuards(JwtGuard)
 @Controller('team')
 export class TeamController {
   constructor(private teamService: TeamService) {}

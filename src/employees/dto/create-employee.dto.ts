@@ -14,3 +14,7 @@ export class CreateEmployee {
   parentId: number;
   project: ProjectDto;
 }
+export class GetDataDto {
+  role: number;
+  team: number;
+}

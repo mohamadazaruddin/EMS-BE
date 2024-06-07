@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { EmployeesService } from './employees.service';
-import { CreateEmployee } from './dto/create-employee.dto';
+import { CreateEmployee, GetDataDto } from './dto/create-employee.dto';
 import { Employee } from './entity/employees.entity';
 import { JwtGuard } from 'src/auth/guards/jwt-auth-guard';
 import { ApiBody } from '@nestjs/swagger';
@@ -9,8 +17,9 @@ import { ApiBody } from '@nestjs/swagger';
 export class EmployeesController {
   constructor(private employeesService: EmployeesService) {}
   @Get()
-  getEmployees() {
-    return this.employeesService.getAllEmployees();
+  getEmployees(@Query() getData: GetDataDto) {
+    const { role, team } = getData;
+    return this.employeesService.getAllEmployees(team, role);
   }
 
   @Get('dashboard')

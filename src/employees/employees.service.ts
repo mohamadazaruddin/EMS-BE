@@ -16,10 +16,21 @@ export class EmployeesService {
     private roleServce: RolesService,
     private projectService: ProjectService,
   ) {}
-  getAllEmployees() {
-    return this.employeeRepository.find({
+  async getAllEmployees(teamId: number, roleId: number) {
+    const empList = await this.employeeRepository.find({
       relations: { role: true, project: true, team: true },
     });
+
+    if (teamId) {
+      const data = empList?.filter((emp) => emp.team.id === Number(teamId));
+      return data;
+    }
+    if (roleId) {
+      const data = empList?.filter((emp) => emp.role.id === Number(roleId));
+
+      return data;
+    }
+    return empList;
   }
 
   async createEmployee(emp: CreateEmployee) {
