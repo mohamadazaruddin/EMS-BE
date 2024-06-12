@@ -10,8 +10,10 @@ export class TimesheetService {
     private readonly timesheetRepository: Repository<Timesheet>,
   ) {}
 
-  async getTimesheet() {
-    return this.timesheetRepository.find({ relations: { employee: true } });
+  async getTimesheet(userId: number) {
+    return this.timesheetRepository.findBy({
+      employee: { id: userId },
+    });
   }
 
   async addrecord(record: any) {
