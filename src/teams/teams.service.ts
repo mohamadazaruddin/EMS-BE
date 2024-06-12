@@ -12,12 +12,14 @@ export class TeamService {
     private readonly teamRepository: Repository<Team>,
   ) {}
 
-  getAllRoles() {
-    return this.teamRepository.find();
+  async getAllRoles() {
+    const teamList = await this.teamRepository.find();
+    let teams = teamList.filter(
+      (team) => !team.teamName.includes('management'),
+    );
+    return teams;
   }
   addNewRole(team: TeamDto) {
-    console.log(team, 'team');
-
     const createteam = this.teamRepository.create(team);
     return this.teamRepository.save(createteam);
   }

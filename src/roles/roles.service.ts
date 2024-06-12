@@ -11,8 +11,10 @@ export class RolesService {
     private readonly roleRepository: Repository<Role>,
   ) {}
 
-  getAllRoles() {
-    return this.roleRepository.find();
+  async getAllRoles() {
+    const rolesList = await this.roleRepository.find();
+    let roles = rolesList.filter((role) => !role.roleName.includes('ceo'));
+    return roles;
   }
   addNewRole(role: RoleDto) {
     const createrole = this.roleRepository.create(role);
