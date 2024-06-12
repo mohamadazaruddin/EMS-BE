@@ -1,4 +1,5 @@
 import { Employee } from 'src/employees/entity/employees.entity';
+import { Project } from 'src/org-projects/projects.entity';
 import {
   Column,
   Entity,
@@ -20,12 +21,17 @@ export class Timesheet {
   @Column()
   estimation: number;
 
+  @Column({ type: 'date' })
+  date: Date;
+
   @Column()
   completed: number;
+
+  @ManyToOne(() => Project, (project) => project.id)
+  @JoinColumn()
+  project: Project;
 
   @ManyToOne(() => Employee, (employee) => employee.id)
   @JoinColumn()
   employee: Employee;
 }
-
-//   user_uuid  varchar
