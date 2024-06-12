@@ -23,12 +23,34 @@ export class EmployeesService {
 
     if (teamId) {
       const data = empList?.filter((emp) => emp.team.id === Number(teamId));
-      return data;
+      let getParentNode = data.filter((emp) => emp.isTeamLead == true);
+      let transformedData = [];
+      data.forEach((user) => {
+        transformedData.push({
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          role: user.role.roleName,
+          parentId: user.isTeamLead ? '' : getParentNode[0].id,
+        });
+      });
+      return transformedData;
     }
     if (roleId) {
       const data = empList?.filter((emp) => emp.role.id === Number(roleId));
+      let getParentNode = data.filter((emp) => emp.isChapterLead == true);
+      let transformedData = [];
+      data.forEach((user) => {
+        transformedData.push({
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          role: user.role.roleName,
+          parentId: user.isChapterLead ? '' : getParentNode[0].id,
+        });
+      });
 
-      return data;
+      return transformedData;
     }
     return empList;
   }
@@ -49,8 +71,9 @@ export class EmployeesService {
   //   this.employees.push(employee);
   //   return employee;
   // }
+
   getEmployeeById(id: number): Promise<Employee[]> {
-    return this.employeeRepository.find();
+    return this.employeeRepository.findBy({ id: id });
   }
 
   async dashboardData() {

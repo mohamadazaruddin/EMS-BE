@@ -13,6 +13,8 @@ export class CreateEmployee {
   team: TeamDto;
   parentId: number;
   project: ProjectDto;
+  isTeamLead: boolean;
+  isChapterLead: boolean;
 }
 export class GetDataDto {
   role: number;

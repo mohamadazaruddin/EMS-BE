@@ -17,7 +17,7 @@ export class AuthService {
     const user = await this.employeeRepository.findOneBy({
       email: credential.email,
     });
-
+    if (!user) throw new NotFoundException('user not found');
     if (user && user.password === credential.password) {
       const { password, ...result } = user;
       return result;
@@ -26,13 +26,22 @@ export class AuthService {
   }
 
   async login(user: User) {
+    const loggedInUser = await this.employeeRepository.findOneBy({
+      email: user.email,
+    });
+    if (!loggedInUser) throw new NotFoundException('user not found');
     const payload = {
       email: user.email,
     };
     const { password, ...result } = user;
     const { email } = result;
+    const { firstname, lastname, id, profileImage } = loggedInUser;
     return {
       email,
+      firstname,
+      lastname,
+      id,
+      profileImage,
       accessToken: this.jwtservice.sign(payload),
     };
   }

@@ -5,6 +5,7 @@ import {
   Param,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
@@ -26,6 +27,12 @@ export class EmployeesController {
   getDashboard() {
     return this.employeesService.dashboardData();
   }
+
+  @Get('user')
+  getLoggedinUser(@Req() req) {
+    return this.employeesService.getEmployeeById(req.user.id);
+  }
+
   @Get(`/:id`)
   getEmployeeById(@Param('id') id: number) {
     return this.employeesService.getEmployeeById(id);

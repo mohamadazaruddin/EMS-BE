@@ -35,6 +35,12 @@ export class Employee {
   @Column('varchar')
   profileImage: string;
 
+  @Column('boolean')
+  isTeamLead: boolean;
+
+  @Column('boolean')
+  isChapterLead: boolean;
+
   @Column('varchar', { nullable: true })
   token: string;
 
@@ -48,9 +54,6 @@ export class Employee {
   @ManyToOne(() => Team, (team) => team.id)
   @JoinColumn()
   team: Team;
-
-  @Column()
-  parentId: number;
 
   @ManyToOne(() => Project, (project) => project.id)
   @JoinColumn()
