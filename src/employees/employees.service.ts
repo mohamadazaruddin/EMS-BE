@@ -20,8 +20,9 @@ export class EmployeesService {
     const empList = await this.employeeRepository.find({
       relations: { role: true, project: true, team: true },
     });
-
-    if (teamId) {
+    const team = await this.teamService.getTeam(teamId);
+    const role = await this.roleServce.getRole(roleId);
+    if (team.length) {
       const data = empList?.filter((emp) => emp.team.id === Number(teamId));
       let getParentNode = data.filter((emp) => emp.isTeamLead == true);
       let transformedData = [];
@@ -30,13 +31,14 @@ export class EmployeesService {
           id: user.id,
           firstname: user.firstname,
           lastname: user.lastname,
+          image: user.profileImage,
           role: user.role.roleName,
           parentId: user.isTeamLead ? '' : getParentNode[0].id,
         });
       });
       return transformedData;
     }
-    if (roleId) {
+    if (role.length) {
       const data = empList?.filter((emp) => emp.role.id === Number(roleId));
       let getParentNode = data.filter((emp) => emp.isChapterLead == true);
       let transformedData = [];
@@ -46,6 +48,7 @@ export class EmployeesService {
           firstname: user.firstname,
           lastname: user.lastname,
           role: user.role.roleName,
+          image: user.profileImage,
           parentId: user.isChapterLead ? '' : getParentNode[0].id,
         });
       });

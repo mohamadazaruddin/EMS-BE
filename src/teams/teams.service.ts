@@ -23,4 +23,8 @@ export class TeamService {
     const createteam = this.teamRepository.create(team);
     return this.teamRepository.save(createteam);
   }
+
+  async getTeam(teamId: number) {
+    return this.teamRepository.findBy({ id: teamId });
+  }
 }

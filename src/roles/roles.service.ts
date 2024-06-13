@@ -20,4 +20,7 @@ export class RolesService {
     const createrole = this.roleRepository.create(role);
     return this.roleRepository.save(createrole);
   }
+  async getRole(teamId: number) {
+    return this.roleRepository.findBy({ id: teamId });
+  }
 }
