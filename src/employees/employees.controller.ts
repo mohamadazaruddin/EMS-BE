@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -13,6 +14,7 @@ import { CreateEmployee, GetDataDto } from './dto/create-employee.dto';
 import { Employee } from './entity/employees.entity';
 import { JwtGuard } from 'src/auth/guards/jwt-auth-guard';
 import { ApiBody } from '@nestjs/swagger';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
 // @UseGuards(JwtGuard)
 @Controller('employees')
 export class EmployeesController {
@@ -36,6 +38,11 @@ export class EmployeesController {
   @Get(`/:id`)
   getEmployeeById(@Param('id') id: number) {
     return this.employeesService.getEmployeeById(id);
+  }
+
+  @Put(`/:id`)
+  updateEmp(@Param('id') id: number, @Body() body: UpdateEmployeeDto) {
+    return this.employeesService.updateEmpDetails(id, body);
   }
 
   @Post()

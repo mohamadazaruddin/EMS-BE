@@ -6,6 +6,7 @@ import { CreateEmployee } from './dto/create-employee.dto';
 import { TeamService } from 'src/teams/teams.service';
 import { RolesService } from 'src/roles/roles.service';
 import { ProjectService } from 'src/org-projects/projects.service';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
 @Injectable()
 export class EmployeesService {
@@ -76,7 +77,10 @@ export class EmployeesService {
   // }
 
   getEmployeeById(id: number): Promise<Employee[]> {
-    return this.employeeRepository.findBy({ id: id });
+    return this.employeeRepository.find({
+      where: { id: id },
+      relations: { role: true, team: true, project: true },
+    });
   }
 
   async dashboardData() {
@@ -86,5 +90,9 @@ export class EmployeesService {
       totalProject: (await this.projectService.getAllRoles()).length,
       totalDepartment: (await this.roleServce.getAllRoles()).length,
     };
+  }
+
+  async updateEmpDetails(id: number, emp: UpdateEmployeeDto) {
+    return await this.employeeRepository.update(id, emp);
   }
 }
