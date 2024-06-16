@@ -45,4 +45,10 @@ export class AuthService {
       accessToken: this.jwtservice.sign(payload),
     };
   }
+
+  async logout(id: number) {
+    return {
+      message: 'Successfully logged out',
+    };
+  }
 }

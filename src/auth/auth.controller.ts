@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -18,5 +19,10 @@ export class AuthController {
   login(@Body() body) {
     console.log(body, 'body');
     return this.authService.login(body);
+  }
+  @Post('logout')
+  logout(@Param() id: number) {
+    // Your logout logic here
+    return this.authService.logout(id);
   }
 }
